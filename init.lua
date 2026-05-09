@@ -2,6 +2,9 @@
 --	This file initializes all the configs from dfferent files
 --=================================================================================================
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- LSP
 require("core.lsp")
 require("core.activation")
