@@ -225,10 +225,10 @@ Diagnostics appear as virtual lines below each offending line (not inline). The 
 
 | Severity | Sign |
 |---|---|
-| Error | |
-| Warning | |
+| Error |  |
+| Warning |  |
 | Info | 󱛉 |
-| Hint | |
+| Hint |   |
 
 `update_in_insert = true` means diagnostics refresh while you type, not only on save.
 
@@ -342,3 +342,4 @@ Install ripgrep. On Ubuntu: `sudo apt install ripgrep`. On Arch: `sudo pacman -S
 **Format on save is slow**
 
 Switch the `BufWritePre` formatter to `async = true` in `core/lsp.lua` if you find it blocks on large files. Note: async formatting does not guarantee the file is written in its formatted state.
+
