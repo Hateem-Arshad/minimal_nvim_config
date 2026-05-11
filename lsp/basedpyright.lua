@@ -1,12 +1,13 @@
--- lsp/basedpyright.lua
 return {
 	settings = {
 		basedpyright = {
 			analysis = {
-				typeCheckingMode = "standard", -- or basic
+				typeCheckingMode = "standard",
 				autoImportCompletions = true,
 				enableCodeLens = true,
 			},
+		},
+		python = {
 			inlayHints = {
 				variableTypes = true,
 				callArgumentNames = true,

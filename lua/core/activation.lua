@@ -19,6 +19,7 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
+	{ src = "https://github.com/nanotee/sqls.nvim" },
 	-- ADD THIS if switching to blink:
 	--{ src = "https://github.com/saghen/blink.cmp" },
 })
@@ -40,6 +41,8 @@ require("mason-lspconfig").setup({
 		"lua_ls", -- Lua (with vim global awareness via lsp/lua_ls.lua)
 		"bashls", -- Bash/Shell
 		"sqls", -- SQL (connection configured per-project via .nvim.lua)
+		"yamlls",
+		"rust_analyzer",
 	},
 	automatic_enable = true,
 })
@@ -52,5 +55,6 @@ require("mason-tool-installer").setup({
 	ensure_installed = {
 		"stylua", -- Lua formatter (respects .stylua.toml config)
 		"shfmt", -- Shell script formatter
+		--"sqlfluff",
 	},
 })

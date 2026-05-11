@@ -50,15 +50,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 
 		-- Format on save
+		---[[
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			buffer = args.buf,
 			callback = function()
+				local file_type = vim.bo[args.buf].filetype
+				if file_type == "sql" then
+					return
+				end
 				vim.lsp.buf.format({ async = false, bufnr = args.buf })
 			end,
 		})
+		--]]
 
 		-- Manual format keymap
 		vim.keymap.set("n", "<leader>f", function()
+			local file_type = vim.bo[args.buf].filetype
+			if file_type == "sql" then
+				return
+			end
 			vim.lsp.buf.format({ async = true, bufnr = args.buf })
 		end, { buffer = args.buf, desc = "Format buffer" })
 
@@ -96,8 +106,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- CodeLens: shows actionable annotations above functions (e.g. run, debug).
 		-- Server support varies — lua_ls and clangd support it, sqls does not.
-		vim.lsp.codelens.enable(true, { bufnr = args.buf })
-
+		if client and client.server_capabilities.codeLensProvider then
+			vim.lsp.codelens.enable(true, { bufnr = args.buf })
+		end
 		-- 8. SIGNATURE HELP
 		-- Auto-triggers the signature float when the server's declared trigger
 		-- characters are typed (typically "(" and ","). Falls back gracefully
