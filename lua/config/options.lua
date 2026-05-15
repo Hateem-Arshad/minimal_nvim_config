@@ -42,13 +42,15 @@ option.splitright = true
 option.showmode = false
 option.pumborder = "rounded"
 option.winborder = "rounded"
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- Files
 option.backup = false
 option.swapfile = false
 option.undofile = true
 option.undodir = vim.fn.stdpath("data") .. "/undo"
-option.clipboard = "unnamedplus"
+--option.clipboard = "unnamedplus"
 
 -- Performance
 option.updatetime = 250
@@ -62,3 +64,8 @@ option.listchars = { tab = "│ ", multispace = "│   ", leadmultispace = "│ 
 
 -- Misc
 option.mouse = "a"
+
+-- to tell its fine to not use perl and ruby
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_ruby_provider = 0

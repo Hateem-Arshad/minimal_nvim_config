@@ -24,6 +24,13 @@ vim.pack.add({
 	--{ src = "https://github.com/saghen/blink.cmp" },
 })
 
+--[[
+vim.cmd("packadd nvim-lspconfig")
+vim.cmd("packadd mason.nvim")
+vim.cmd("packadd mason-lspconfig.nvim")
+vim.cmd("packadd mason-tool-installer.nvim")
+vim.cmd("packadd sqls.nvim")
+]]
 -- 2. MASON SETUP
 -- Opens with :Mason — shows installed/pending servers and their status.
 require("mason").setup()
@@ -42,10 +49,23 @@ require("mason-lspconfig").setup({
 		"bashls", -- Bash/Shell
 		"sqls", -- SQL (connection configured per-project via .nvim.lua)
 		"yamlls",
+		"jsonls",
 		"rust_analyzer",
 	},
 	automatic_enable = true,
 })
+
+--[[
+vim.lsp.enable({
+  "lua_ls",
+  "rust_analyzer",
+  "sqls",
+  "bashls",
+  "clangd",
+  "yamlls",
+  "basedpyright",
+})
+--]]
 
 -- 4. FORMATTERS & LINTERS
 -- mason-tool-installer manages non-LSP tools Mason can install.
