@@ -1,8 +1,5 @@
 local option = vim.opt
 
--- show 2 signs so that diff_gutter.lua can work
---vim.o.signcolumn = "yes:2"
-
 -- sqls odd behaviour
 vim.o.exrc = true -- allow per-project .nvim.lua files
 vim.g.omni_sql_no_default_maps = 1
@@ -36,7 +33,7 @@ option.path:append("**")
 
 -- UI
 option.termguicolors = true
-option.signcolumn = "auto:2"
+option.signcolumn = "yes"
 option.scrolloff = 12
 option.sidescrolloff = 12
 option.wrap = false

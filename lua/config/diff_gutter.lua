@@ -96,6 +96,9 @@ local function contains(tbl, value)
 	return false
 end
 
+-- Custom highlight (VS Code purple)
+vim.api.nvim_set_hl(0, "DiffGutterAdd", { fg = "#A855F7" })
+
 -- Mark lines in current buffer that are not in matched
 local function mark_changes(original, current, matched)
 	if not original or #original == 0 then
@@ -106,8 +109,8 @@ local function mark_changes(original, current, matched)
 	for i, line in ipairs(current) do
 		if not contains(matched, line) then
 			vim.api.nvim_buf_set_extmark(0, ns, i - 1, 0, {
-				sign_text = "▎",
-				sign_hl_group = "DiffAdd",
+				virt_text = { { "▎", "DiffGutterAdd" } },
+				virt_text_pos = "right_align",
 				priority = 50,
 			})
 		end
@@ -118,6 +121,12 @@ end
 local original = {}
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufEnter" }, {
 	callback = function()
+		if vim.bo.buftype ~= "" then
+			return
+		end
+		if vim.bo.filetype == "netrw" then
+			return
+		end
 		local path = vim.fn.expand("%:p")
 		if path ~= "" and vim.fn.filereadable(path) == 1 then
 			original = vim.fn.readfile(path)
@@ -129,6 +138,12 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufEnter" }, {
 local timer = nil
 vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 	callback = function()
+		if vim.bo.buftype ~= "" then
+			return
+		end
+		if vim.bo.filetype == "netrw" then
+			return
+		end
 		if timer then
 			timer:stop()
 		end
