@@ -19,6 +19,7 @@ require("config.options")
 require("config.keymaps")
 require("config.statusline")
 require("config.autocmd")
+require("config.diff_gutter")
 --]]
 
 require("plugins.themes")

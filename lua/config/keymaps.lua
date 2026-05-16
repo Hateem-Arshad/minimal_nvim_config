@@ -4,7 +4,7 @@ local kmap = vim.keymap
 local function split_terminal()
 	-- your two commands here
 
-	vim.cmd("belowright 15split")
+	vim.cmd("belowright 10split")
 	vim.cmd("term")
 end
 
