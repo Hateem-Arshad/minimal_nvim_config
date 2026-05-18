@@ -10,8 +10,8 @@ end
 
 kmap.set("n", "<C-s>", split_terminal, { desc = "Terminal in the Bottom window" })
 
--- opening :Lex
-kmap.set("n", "<leader>e", ":Lex<CR>", { desc = "Explorer" })
+-- opening :Lex | i changed to :Ex because "Lex was showing some difficulties on repeated use, till now i do not know what that is
+kmap.set("n", "<leader>e", ":Ex<CR>", { desc = "Explorer" })
 
 -- LSP completion trigger in Insert mode
 -- This makes <C-Space> behave like <C-x><C-o>
