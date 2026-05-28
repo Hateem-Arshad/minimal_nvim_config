@@ -24,13 +24,6 @@ vim.pack.add({
 	--{ src = "https://github.com/saghen/blink.cmp" },
 })
 
---[[
-vim.cmd("packadd nvim-lspconfig")
-vim.cmd("packadd mason.nvim")
-vim.cmd("packadd mason-lspconfig.nvim")
-vim.cmd("packadd mason-tool-installer.nvim")
-vim.cmd("packadd sqls.nvim")
-]]
 -- 2. MASON SETUP
 -- Opens with :Mason — shows installed/pending servers and their status.
 require("mason").setup()
@@ -54,31 +47,23 @@ require("mason-lspconfig").setup({
 		"rust_analyzer",
 		"julials",
 	},
-	automatic_enable = {
-		"basedpyright",
-		"ruff",
-		"clangd",
-		"lua_ls",
-		"bashls",
-		"sqls",
-		"yamlls",
-		"jsonls",
-		"rust_analyzer",
-		-- julials intentionally omitted, started manually below
-	},
+	-- true,
+	automatic_enable =
+		---[[
+		{
+			"basedpyright",
+			"ruff",
+			"clangd",
+			"lua_ls",
+			"bashls",
+			"sqls",
+			"yamlls",
+			"jsonls",
+			"rust_analyzer",
+			-- julials intentionally omitted, started manually below
+		},
+	--]]
 })
-
---[[
-vim.lsp.enable({
-  "lua_ls",
-  "rust_analyzer",
-  "sqls",
-  "bashls",
-  "clangd",
-  "yamlls",
-  "basedpyright",
-})
---]]
 
 -- 4. FORMATTERS & LINTERS
 -- mason-tool-installer manages non-LSP tools Mason can install.
@@ -94,15 +79,16 @@ require("mason-tool-installer").setup({
 
 -- Override julials before_init: mason-lspconfig's version fails to inject
 -- the project path. This programmatic call has highest config priority.
-
+--[[
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "julia",
-	callback = function(args)
-		local root = vim.fs.root(args.buf, { "Project.toml", "JuliaProject.toml" }) or vim.fn.getcwd()
-		vim.lsp.start({
-			name = "julials",
-			cmd = { "julia-lsp", root },
-			root_dir = root,
-		})
-	end,
+    pattern = "julia",
+    callback = function(args)
+        local root = vim.fs.root(args.buf, { "Project.toml", "JuliaProject.toml" }) or vim.fn.getcwd()
+        vim.lsp.start({
+            name = "julials",
+            cmd = { "julia-lsp", root },
+            root_dir = root,
+        })
+    end,
 })
+--]]

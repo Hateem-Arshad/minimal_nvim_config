@@ -21,3 +21,17 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 --]]
+
+-- Override julials before_init: mason-lspconfig's version fails to inject
+-- the project path. This programmatic call has highest config priority.
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "julia",
+	callback = function(args)
+		local root = vim.fs.root(args.buf, { "Project.toml", "JuliaProject.toml" }) or vim.fn.getcwd()
+		vim.lsp.start({
+			name = "julials",
+			cmd = { "julia-lsp", root },
+			root_dir = root,
+		})
+	end,
+})
