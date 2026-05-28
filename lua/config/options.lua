@@ -1,9 +1,12 @@
 local option = vim.opt
 
 -- python provider -> pynvim to a venv and not root files, so no system break package flags on pip
+-- activate the given block if you want to use pynvim from a venv, right now I am using a global pynvim install
+--[[
 vim.g.python3_host_prog = vim.env.HOME .. "/.local/share/nvim/venv/bin/python3"
 
 vim.opt.runtimepath:append(vim.env.HOME .. "/.local/share/nvim/site")
+--]]
 
 -- sqls odd behaviour
 vim.o.exrc = true -- allow per-project .nvim.lua files

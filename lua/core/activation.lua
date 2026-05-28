@@ -44,6 +44,7 @@ require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"basedpyright", -- Python (community pyright fork, stricter types)
+		"ruff",
 		"clangd", -- C/C++
 		"lua_ls", -- Lua (with vim global awareness via lsp/lua_ls.lua)
 		"bashls", -- Bash/Shell
@@ -51,8 +52,20 @@ require("mason-lspconfig").setup({
 		"yamlls",
 		"jsonls",
 		"rust_analyzer",
+		"julials",
 	},
-	automatic_enable = true,
+	automatic_enable = {
+		"basedpyright",
+		"ruff",
+		"clangd",
+		"lua_ls",
+		"bashls",
+		"sqls",
+		"yamlls",
+		"jsonls",
+		"rust_analyzer",
+		-- julials intentionally omitted, started manually below
+	},
 })
 
 --[[
@@ -77,4 +90,19 @@ require("mason-tool-installer").setup({
 		"shfmt", -- Shell script formatter
 		--"sqlfluff",
 	},
+})
+
+-- Override julials before_init: mason-lspconfig's version fails to inject
+-- the project path. This programmatic call has highest config priority.
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "julia",
+	callback = function(args)
+		local root = vim.fs.root(args.buf, { "Project.toml", "JuliaProject.toml" }) or vim.fn.getcwd()
+		vim.lsp.start({
+			name = "julials",
+			cmd = { "julia-lsp", root },
+			root_dir = root,
+		})
+	end,
 })

@@ -7,7 +7,7 @@
 -- Floating window borders are handled globally by 'winborder' in options.lua.
 vim.diagnostic.config({
 	virtual_lines = false,
-	virtual_text = false,
+	virtual_text = true,
 	underline = true,
 	update_in_insert = true,
 	severity_sort = true,

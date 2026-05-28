@@ -19,6 +19,7 @@ configs.setup({
 		"markdown_inline",
 		"json",
 		"yaml",
+		"julia",
 	},
 	auto_install = true, -- installs parser when you open an unknown filetype
 	highlight = {

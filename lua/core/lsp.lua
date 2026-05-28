@@ -188,6 +188,13 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 		vim.g.lsp_continuous = false
 	end,
 })
+--[[
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		vim.cmd("lcd " .. vim.fn.expand("%:p:h"))
+	end,
+})
+--]]
 
 -- 9. COMPLETION POPUP OPTIONS
 -- completeopt flags:
