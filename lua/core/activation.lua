@@ -15,13 +15,11 @@
 
 -- 1. PLUGIN INSTALLATION (vim.pack — Neovim 0.12 built-in package manager)
 vim.pack.add({
-	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
-	{ src = "https://github.com/nanotee/sqls.nvim" },
-	-- ADD THIS if switching to blink:
-	--{ src = "https://github.com/saghen/blink.cmp" },
+    { src = "https://github.com/neovim/nvim-lspconfig" },
+    { src = "https://github.com/mason-org/mason.nvim" },
+    { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+    { src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
+    { src = "https://github.com/nanotee/sqls.nvim" },
 })
 
 -- 2. MASON SETUP
@@ -35,34 +33,34 @@ require("mason").setup()
 -- Per-server settings (root markers, filetypes, custom config) live in
 -- ~/.config/nvim/lsp/<servername>.lua and are auto-discovered by Neovim.
 require("mason-lspconfig").setup({
-	ensure_installed = {
-		"basedpyright", -- Python (community pyright fork, stricter types)
-		"ruff",
-		"clangd", -- C/C++
-		"lua_ls", -- Lua (with vim global awareness via lsp/lua_ls.lua)
-		"bashls", -- Bash/Shell
-		"sqls", -- SQL (connection configured per-project via .nvim.lua)
-		"yamlls",
-		"jsonls",
-		"rust_analyzer",
-		"julials",
-	},
-	-- true,
-	automatic_enable =
-		---[[
-		{
-			"basedpyright",
-			"ruff",
-			"clangd",
-			"lua_ls",
-			"bashls",
-			"sqls",
-			"yamlls",
-			"jsonls",
-			"rust_analyzer",
-			-- julials intentionally omitted, started manually below
-		},
-	--]]
+    ensure_installed = {
+        "basedpyright", -- Python (community pyright fork, stricter types)
+        "ruff",
+        "clangd",       -- C/C++
+        "lua_ls",       -- Lua (with vim global awareness via lsp/lua_ls.lua)
+        "bashls",       -- Bash/Shell
+        "sqls",         -- SQL (connection configured per-project via .nvim.lua)
+        "yamlls",
+        "jsonls",
+        "rust_analyzer",
+        "julials",
+    },
+    -- true,
+    automatic_enable =
+    ---[[
+    {
+        "basedpyright",
+        "ruff",
+        "clangd",
+        "lua_ls",
+        "bashls",
+        "sqls",
+        "yamlls",
+        "jsonls",
+        "rust_analyzer",
+        -- julials intentionally omitted, started manually below
+    },
+    --]]
 })
 
 -- 4. FORMATTERS & LINTERS
@@ -70,11 +68,11 @@ require("mason-lspconfig").setup({
 -- These are separate from LSP servers — they handle code formatting only.
 -- Wire them to a keymap or autocmd in keymaps.lua / autocmd.lua as needed.
 require("mason-tool-installer").setup({
-	ensure_installed = {
-		"stylua", -- Lua formatter (respects .stylua.toml config)
-		"shfmt", -- Shell script formatter
-		--"sqlfluff",
-	},
+    ensure_installed = {
+        "stylua", -- Lua formatter (respects .stylua.toml config)
+        "shfmt",  -- Shell script formatter
+        --"sqlfluff",
+    },
 })
 
 -- Override julials before_init: mason-lspconfig's version fails to inject
